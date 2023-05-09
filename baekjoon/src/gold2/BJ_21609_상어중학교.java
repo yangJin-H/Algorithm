@@ -19,30 +19,32 @@ public class BJ_21609_상어중학교 {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		
 		StringTokenizer st = new StringTokenizer(br.readLine());
-		N = Integer.parseInt(st.nextToken());
-		M = Integer.parseInt(st.nextToken());
-		map = new int[N][N];
+		N = Integer.parseInt(st.nextToken()); // 격자의 크기
+		M = Integer.parseInt(st.nextToken()); // 색상의 개수
+		map = new int[N][N]; // 전체 격자
 		
 		for(int r = 0; r < N; r++) {
 			st = new StringTokenizer(br.readLine());
-			for(int c = 0; c < N; c++) {
+			for(int c = 0; c < N; c++) { // 숫자 입력 받기
 				map[r][c] = Integer.parseInt(st.nextToken());
 			}
 		}
 		
+		// 블록 그룹이 있는 동안
 		while(find()) {
-			autoplay();
+			autoplay(); // 오토 플레이
 		}
 		
-		System.out.println(score);
+		System.out.println(score); // 출력
 	}
 
+	// 블록 그룹 찾기
 	private static boolean find() {
 		boolean[][] visited = new boolean[N][N];
-		bx = -1;
-		by = -1;
-		int maxr = 0;
-		int maxi = 0;
+		bx = -1; // 기준 블록의 x좌표
+		by = -1; // 기준 블록의 y좌표
+		int maxr = 0; // 블록 그룹의 가장 큰 
+		int maxi = 0; // 
 		for(int r = 0; r < N; r++) {
 			for(int c = 0; c < N; c++) {
 				if(map[r][c] <= 0 || visited[r][c]) continue;

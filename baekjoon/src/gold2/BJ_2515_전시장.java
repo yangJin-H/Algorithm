@@ -10,7 +10,7 @@ import java.util.TreeSet;
 public class BJ_2515_전시장 {
 	
 	static class Paint {
-		int height, cost;
+		int height, cost; // 그림의 높이와 가격
 
 		public Paint(int height, int cost) {
 			this.height = height;
@@ -18,16 +18,16 @@ public class BJ_2515_전시장 {
 		}
 	}
 	
-	static Paint[] sorted;
+	static Paint[] sorted; // 병합 정렬용 임시 배열
 	
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		
 		StringTokenizer st = new StringTokenizer(br.readLine());
-		int N = Integer.parseInt(st.nextToken());
-		int S = Integer.parseInt(st.nextToken());
+		int N = Integer.parseInt(st.nextToken()); // 그림 수
+		int S = Integer.parseInt(st.nextToken()); // 보여야 하는 최소 길이
 		
-		Paint[] paints = new Paint[N];
+		Paint[] paints = new Paint[N]; // 그림 입력 받기
 		for(int i = 0; i < N; i++) {
 			st = new StringTokenizer(br.readLine());
 			int height = Integer.parseInt(st.nextToken());
@@ -36,8 +36,12 @@ public class BJ_2515_전시장 {
 		}
 		
 		sorted = new Paint[N];
-		mergesort(paints, 0, N-1);
+		mergesort(paints, 0, N-1); // 병합 정렬(높이순 오름차순 /같다면 가격순 내림차순)
 
+		// 높이 순 오름차순 정렬한 TreeSet
+		// TreeSet 사용 이유
+		// 1. 바로 앞에 놓일 수 있는 그림을 가져오기 위해
+		// 2. 높이가 같은 그림 처리 (Set -> 높이가 같은 그림이 이미 들어가 있다면 무시)
 		TreeSet<Paint> memo = new TreeSet<Paint>(new Comparator<Paint>() {
 			@Override
 			public int compare(Paint o1, Paint o2) {
@@ -45,25 +49,25 @@ public class BJ_2515_전시장 {
 			}
 		});
 
-		int max = 0;
-		for(int i = 0; i < N; i++) {
-			Paint fp = memo.floor(paints[i]);
-			if(fp == null) {
-				paints[i].height += S;
-				if(max < paints[i].cost) { 
-					memo.add(paints[i]);
-					max = paints[i].cost;
+		int max = 0; // 판매 가능 그림들의 가격 합 최대
+		for(int i = 0; i < N; i++) { // 높이가 낮은 그림부터 순서대로 선택
+			Paint fp = memo.floor(paints[i]); // 선택한 그림(paints[i])을 보이게 놓을 수 있게하는 그림 중 가장 큰 그림 선택
+			if(fp == null) { // 그런 그림이 없다면
+				paints[i].height += S; // 다음 그림을 위해 S값 높이에 더해주기
+				if(max < paints[i].cost) { // 선택한 그림의 가격이 현재 최대값보다 크다면
+					max = paints[i].cost; // 최대값 갱신
+					memo.add(paints[i]); // TreeSet에 넣어주기
 				}
-			} else {
-				paints[i].height += S;
-				if(max < paints[i].cost + fp.cost) {
-					paints[i].cost += fp.cost;
-					max = paints[i].cost;
-					memo.add(paints[i]);
+			} else { // fp가 있다면
+				paints[i].height += S; // 다음 그림을 위해 S값 높이에 더해주기
+				if(max < paints[i].cost + fp.cost) { // 선택한 그림 가격 + 그 앞의 그림들의 가격 합이 최대값보다 크다면
+					paints[i].cost += fp.cost; // 선택한 그림에 가격 누적
+					max = paints[i].cost; // 최대값 갱신
+					memo.add(paints[i]); // TreeSet에 넣어주기
 				}
 			}	
 		}
-		System.out.println(max);
+		System.out.println(max); // 출력
 	}
 
 	private static void mergesort(Paint[] paints, int left, int right) {
@@ -73,7 +77,7 @@ public class BJ_2515_전시장 {
 			mid = (left+right)/2;
 			mergesort(paints, left, mid);
 			mergesort(paints, mid+1, right);
-			merge(paints, left, mid, right);
+			merge(paints, left, mid, right); // 병합
 		}
 	}
 
@@ -83,8 +87,8 @@ public class BJ_2515_전시장 {
 		int k = left;
 		
 		while(l <= mid && r <= right) {
-			if(paints[l].height == paints[r].height) {
-				if(paints[l].cost >= paints[r].cost) {
+			if(paints[l].height == paints[r].height) { // 높이가 같은 경우
+				if(paints[l].cost >= paints[r].cost) { // 가격순으로 정렬
 					sorted[k++] = paints[l++];
 				} else {
 					sorted[k++] = paints[r++];
@@ -107,6 +111,7 @@ public class BJ_2515_전시장 {
 			}
 		}
 		
+		// 임시 배열 값 옮겨주기
 		for(int i = left; i <= right; i++) {
 			paints[i] = sorted[i];
 		}

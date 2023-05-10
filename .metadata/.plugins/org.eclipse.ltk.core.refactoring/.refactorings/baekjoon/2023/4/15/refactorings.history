@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Rename type &apos;gold2.BJ_17136_색종이붙이기&apos; to &apos;BJ_17136_색종이붙이기_양진형&apos;&#x0D;&#x0A;- Original project: &apos;baekjoon&apos;&#x0D;&#x0A;- Original element: &apos;gold2.BJ_17136_색종이붙이기&apos;&#x0D;&#x0A;- Renamed element: &apos;gold2.BJ_17136_색종이붙이기_양진형&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;BJ_17136_색종이붙이기&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;gold2{BJ_17136_색종이붙이기.java[BJ_17136_색종이붙이기" matchStrategy="1" name="BJ_17136_색종이붙이기_양진형" qualified="false" references="true" similarDeclarations="false" stamp="1681092916986" textual="false" version="1.0"/>
-</session>

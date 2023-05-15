@@ -65,7 +65,7 @@ public class BJ_2515_전시장 {
 					max = paints[i].cost; // 최대값 갱신
 					memo.add(paints[i]); // TreeSet에 넣어주기
 				}
-			}	
+			}
 		}
 		System.out.println(max); // 출력
 	}

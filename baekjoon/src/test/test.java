@@ -6,12 +6,7 @@ import java.io.InputStreamReader;
 
 public class test {
 	public static void main(String[] args) throws NumberFormatException, IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		int a = 55, r = 2, i = 4;
-		System.out.println(Integer.toBinaryString(a));
-		System.out.println(Integer.toBinaryString((a>>(r+i))<<i));
-		System.out.println(Integer.toBinaryString(a%(1<<i)));
-		System.out.println(Integer.toBinaryString((a%(1<<i))+((a>>(r+i))<<i)));
+		System.out.println(Integer.MAX_VALUE/2 + Integer.MAX_VALUE/2);
 	}
 	
 	public static int gcd(int x, int y) {

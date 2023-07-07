@@ -76,13 +76,10 @@ public class BJ_23289_온풍기안녕 {
 					queue.add(new int[] {nx, ny, e[2]-1});
 					visited[nx][ny] = true;
 				}
-				int c = 0;
-				int k;
-				if(d < 3) k = 3;
-				else k = 1;
-				while(true) {
-					k += c;
-					if(c++ > 2) break;
+				int[] kDist;
+				if(d < 3) kDist = new int[] {3, 4};
+				else kDist = new int[] {1, 2};
+				for (int k : kDist) {
 					nx = e[0] + dx[k];
 					ny = e[1] + dy[k];
 					if(!wallMap[e[0]][e[1]][k] && ny >= 0 && ny < C) {

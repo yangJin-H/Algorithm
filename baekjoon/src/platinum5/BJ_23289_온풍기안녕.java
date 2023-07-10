@@ -1,7 +1,5 @@
 package baekjoon.src.platinum5;
 
-import sun.security.util.math.intpoly.IntegerPolynomial;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -159,12 +157,6 @@ public class BJ_23289_온풍기안녕 {
 			if(flag) break;
 		}
 
-		for(int[] row : heatMap) {
-			for(int t : row) {
-				System.out.print(t+" ");
-			}
-			System.out.println();
-		}
 		System.out.println(choco);
 	}
 }
